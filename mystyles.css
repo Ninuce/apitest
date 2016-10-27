@@ -1,10 +1,3 @@
-/*div#pictures {
-
-  display: inline-block;
-  flex-wrap: wrap;
-     flex-direction: column;
-}*/
-
 #pictures {
   display: flex;
   flex-direction: row;
@@ -12,14 +5,17 @@
   align-items: flex-end;
   flex-wrap: wrap;
 }
+
+
 .formatted {
     border: solid black 10px;
     flex-grow: 1;
     max-width: 400px;
     height: auto;
     margin: 10px;
-
 }
+
+
 button {
   background-color:grey;
 	border:2px solid dimGrey;
