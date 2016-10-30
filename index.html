@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="mystyles.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="token.js"></script>
 
   </head>
 
   <body>
-
     <div>
       <div id="pictures">
       </div>
@@ -21,41 +21,37 @@
     </div>
 
     <script>
-
       $(document).ready(function() {
-          reloadFeed();
-        });
+        reloadFeed();
+      });
 
       reloadFeed = function() {
         $.ajax({
-            method: "GET",
-            url: "https://api.instagram.com/v1/users/self/media/recent/?access_token=",
-            dataType: "jsonp",
-            jsonp: "callback",
-            jsonpCallback: "jsonpcallback",
-            success: function(data) {
-              console.log(data.data);
+          method: "GET",
+          url: "https://api.instagram.com/v1/users/self/media/recent/?access_token=" + INSTAGRAM_TOKEN,
+          dataType: "jsonp",
+          jsonp: "callback",
+          jsonpCallback: "jsonpcallback",
+          success: function(data) {
+            console.log(data.data);
 
-              $.each(data.data, function(i, pic) {
-                console.log(pic.images.standard_resolution.url);
+            $.each(data.data, function(i, pic) {
+              console.log(pic.images.standard_resolution.url);
 
-                var img = $('<img>'); //Equivalent: $(document.createElement('img'))
-                img.attr('class', 'formatted');
-                img.attr('src', pic.images.standard_resolution.url);
-                img.appendTo('#pictures');
+              var img = $('<img>'); //Equivalent: $(document.createElement('img'))
+              img.attr('class', 'formatted');
+              img.attr('src', pic.images.standard_resolution.url);
+              img.appendTo('#pictures');
 
-              });
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              $("#log").val($("#log").val() + 'Error\n');
-            }
+            });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            $("#log").val($("#log").val() + 'Error\n');
+          }
         });
-      console.log("feed reloaded")
+
+        console.log("feed reloaded")
       }
-
-
-  </script>
-</body>
-
-
+    </script>
+  </body>
 </html>
